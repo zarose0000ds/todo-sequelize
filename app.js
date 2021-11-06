@@ -6,6 +6,8 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
 
+const routes = require('./routes')
+
 const app = express()
 const PORT = process.env.PORT
 
@@ -18,9 +20,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride('_method'))
 
 // ROUTES
-app.get('/', (req, res) => {
-  res.send('hello world')
-})
+app.use(routes)
 
 // LISTENING
 app.listen(PORT, () => {
