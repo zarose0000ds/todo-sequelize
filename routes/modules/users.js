@@ -1,5 +1,8 @@
 const router = require('express').Router()
 
+const db = require('../../models')
+const User = db.User
+
 router.get('/login', (req, res) => {
   res.render('login')
 })
@@ -13,7 +16,8 @@ router.get('/register', (req, res) => {
 })
 
 router.post('/register', (req, res) => {
-  res.send('register')
+  const { name, email, password, confirmPassword } = req.body
+  User.create({ name, email, password }).then(() => res.redirect('/'))
 })
 
 router.get('/logout', (req, res) => {
