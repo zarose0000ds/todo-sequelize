@@ -32,14 +32,15 @@ router.post('/register', (req, res) => {
     }
     return bcrypt.genSalt(10).then(salt => bcrypt.hash(password, salt)).then(hash => User.create({
       name,
-        email,
-        password: hash
-      })).then(() => res.redirect('/')).catch(e => console.log(e))
+      email,
+      password: hash
+    })).then(() => res.redirect('/')).catch(e => console.log(e))
   })
 })
 
 router.get('/logout', (req, res) => {
-  res.send('logout')
+  req.logout()
+  res.redirect('/users/login')
 })
 
 module.exports = router
